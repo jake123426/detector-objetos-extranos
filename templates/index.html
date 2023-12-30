@@ -1,0 +1,19 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Bienvenido</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Inicio</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <p class="mb-0">
+                    En esta aplicación web se realizara la detección de objetos extraños presentes en una cinta transportadora de almendras                                    
+                    , mediante el uso de vision artificial el cual tomara las imagenes o frames para detectar tanto piedras como ramas.
+                </p>
+            </div>
+        </div>                        
+    </div>
+{% endblock %}
