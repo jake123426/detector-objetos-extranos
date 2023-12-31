@@ -85,31 +85,31 @@ def generate():
             break                
         # cv2.rectangle( frame, (20,20), (100,100), (0, 255, 0), 2)
         # Convertir el frame a un formato de imagen (por ejemplo, JPEG)
-        _, buffer = cv2.imencode('.jpg', frame)
-        bytes_image = bytearray(buffer)
+        # _, buffer = cv2.imencode('.jpg', frame)
+        # bytes_image = bytearray(buffer)
         
-        response = client.detect_custom_labels(
-            ProjectVersionArn = model,
-            MinConfidence = min_confidence,
-            Image = {
-                'Bytes': bytes_image
-            }
-        )        
-        # Obtener las dimensiones de la imagen (ancho y alto)
-        alto, ancho = frame.shape[:2]        
-        for bounding_box in response['CustomLabels']:
-            if ( bounding_box['Name'] == "piedra" or bounding_box['Name'] == "rama" ):    
-                left = int(bounding_box['Geometry']['BoundingBox']['Left'] * ancho)
-                top = int(bounding_box['Geometry']['BoundingBox']['Top'] * alto)
-                width = int(bounding_box['Geometry']['BoundingBox']['Width'] * ancho)
-                height = int(bounding_box['Geometry']['BoundingBox']['Height'] * alto)            
-                # Coordenadas del rectángulo
-                bottom_right_x = left + width
-                bottom_right_y = top + height            
-                # Dibujar el rectángulo en la imagen
-                cv2.rectangle(frame, (left, top), (bottom_right_x, bottom_right_y), (0, 255, 0), 2)  # Color verde, grosor 2            
-                # Agregar texto a la imagen con la etiqueta
-                cv2.putText(frame, "DESCARTAR", (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 2)  # Color verde, tamaño 0.7, grosor 2            
+        # response = client.detect_custom_labels(
+        #     ProjectVersionArn = model,
+        #     MinConfidence = min_confidence,
+        #     Image = {
+        #         'Bytes': bytes_image
+        #     }
+        # )        
+        # # Obtener las dimensiones de la imagen (ancho y alto)
+        # alto, ancho = frame.shape[:2]        
+        # for bounding_box in response['CustomLabels']:
+        #     if ( bounding_box['Name'] == "piedra" or bounding_box['Name'] == "rama" ):    
+        #         left = int(bounding_box['Geometry']['BoundingBox']['Left'] * ancho)
+        #         top = int(bounding_box['Geometry']['BoundingBox']['Top'] * alto)
+        #         width = int(bounding_box['Geometry']['BoundingBox']['Width'] * ancho)
+        #         height = int(bounding_box['Geometry']['BoundingBox']['Height'] * alto)            
+        #         # Coordenadas del rectángulo
+        #         bottom_right_x = left + width
+        #         bottom_right_y = top + height            
+        #         # Dibujar el rectángulo en la imagen
+        #         cv2.rectangle(frame, (left, top), (bottom_right_x, bottom_right_y), (0, 255, 0), 2)  # Color verde, grosor 2            
+        #         # Agregar texto a la imagen con la etiqueta
+        #         cv2.putText(frame, "DESCARTAR", (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 2)  # Color verde, tamaño 0.7, grosor 2            
         
         (flag, encodedImage) = cv2.imencode(".jpg", frame)
         if not flag:
@@ -147,5 +147,5 @@ def upload_file():
         return redirect( url_for('analizar_video') )
 
 
-if __name__ == '__main__':
-    app.run()       
+# if __name__ == '__main__':
+#     app.run()       
