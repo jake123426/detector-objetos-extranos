@@ -21,3 +21,4 @@ urllib3==1.26.18
 werkzeug==3.0.1
 zipp==3.17.0
 gevent>=1.4.0
+libgl1-mesa-glx
