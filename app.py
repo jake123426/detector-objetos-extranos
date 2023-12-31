@@ -1,29 +1,29 @@
 from flask import Flask, request, render_template, Response, jsonify, redirect, url_for
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 import boto3
 import cv2
 import os
 
-# Credenciales
-access_key = 'AKIA4KNVHAXENZDY6UTB'
-secret_key = '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'
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
 
 # Crear el cliente de Rekognition con las credenciales
 client = boto3.client(
     'rekognition',
-    aws_access_key_id=access_key,
-    aws_secret_access_key=secret_key
+    aws_access_key_id = os.getenv("ACCESS_KEY"),
+    aws_secret_access_key = os.getenv("SECRET_KEY")
 )
-# Datos del modelo personalizado
-model = 'arn:aws:rekognition:us-east-2:847025472968:project/objetos_extranos/version/objetos_extranos.2023-12-29T02.11.22/1703830282933'
-min_confidence = 90
 
+# Datos del modelo personalizado
+model = os.getenv("MODEL_ARN")
+min_confidence = 90
 directorio_actual = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = directorio_actual + '/static/assets/video'
 ALLOWED_EXTENSION = {'png', 'jpg', 'jpeg', 'mp4', 'avi', 'mov', 'wmv'}
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'SixsIj62nEwIOWbKPZ2yQhglpkzK030T'
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY_APP")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 video = None
