@@ -23,7 +23,7 @@ directorio_actual = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = directorio_actual + '/static/assets/video'
 ALLOWED_EXTENSION = {'png', 'jpg', 'jpeg', 'mp4', 'avi', 'mov', 'wmv'}
 
-app = Flask(__name__, static_url_path="/static")
+app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY_APP")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -148,5 +148,5 @@ def upload_file():
         return redirect( url_for('analizar_video') )
 
 
-# if __name__ == '__main__':
-#     app.run()       
+if __name__ == '__main__':
+    app.run()       
