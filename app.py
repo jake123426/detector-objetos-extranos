@@ -84,7 +84,7 @@ def generate():
         ret, frame = video.read()
         if not ret:
             break                
-        cv2.rectangle( frame, (20,20), (100,100), (0, 255, 0), 2)
+        # cv2.rectangle( frame, (20,20), (100,100), (0, 255, 0), 2)
         # Convertir el frame a un formato de imagen (por ejemplo, JPEG)
         _, buffer = cv2.imencode('.jpg', frame)
         bytes_image = bytearray(buffer)
